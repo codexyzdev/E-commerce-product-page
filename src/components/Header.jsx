@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import { StoreContext } from "./StoreContext";
 
-export default  function Header(){
+export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const { count } = useContext(StoreContext);
+  const { count, setCount } = useContext(StoreContext);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -124,12 +124,40 @@ export default  function Header(){
           <h2 className='font-bold p-5 '>Cart</h2>
           <div className='bg-black/10 h-[1px]' />
           <div className=' p-5 h-56 w-full  overflow-y-auto flex flex-col justify-center items-center gap-4'>
-            <p className='font-semibold'>Your cart is empty</p>
+            {count > 0 ? (
+              <div className='flex flex-col gap-4 w-full'>
+                <div className='flex justify-between items-center text-[14px] gap-4 w-full'>
+                  <img
+                    className='size-12 rounded-md'
+                    src='/images/image-product-1-thumbnail.jpg'
+                  />
+                  <div className='flex justify-between items-center w-full'>
+                    <div className='flex flex-col gap-1 '>
+                      <span>Fall Limited Edition Sneakers</span>
+                      <span className='flex gap-2'>
+                        $125.00 x {count}{" "}
+                        <div className='font-bold'>${125 * count}</div>
+                      </span>
+                    </div>
+                    <button
+                      onClick={() => setCount(0)}
+                      className='cursor-pointer'
+                    >
+                      <img src='/images/icon-delete.svg' alt='' />
+                    </button>
+                  </div>
+                </div>
+                <button className='bg-orange font-bold py-3 rounded-md w-full flex justify-center items-center gap-2'>
+                
+                  <span>Checkout</span>
+                </button>
+              </div>
+            ) : (
+              <p className='font-semibold'>Your cart is empty</p>
+            )}
           </div>
         </div>
       </nav>
     </header>
   );
-};
-
-
+}
