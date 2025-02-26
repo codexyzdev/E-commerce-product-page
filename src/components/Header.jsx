@@ -117,7 +117,7 @@ export default function Header() {
         <div
           className={`cart-container absolute z-50
              w-full md:w-96 h-72 transition-transform duration-300 ease-in-out
-             bg-white rounded-lg top-16 md:right-0 md:top-16 shadow-md overflow-hidden  ${
+             bg-white rounded-lg top-15 md:right-0 md:top-16 shadow-md overflow-hidden  ${
                isCartOpen ? "scale-100" : "scale-0"
              }`}
         >
