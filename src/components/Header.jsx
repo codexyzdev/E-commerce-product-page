@@ -1,14 +1,34 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { StoreContext } from "./StoreContext";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { count, setCount } = useContext(StoreContext);
-
+  const cartButtonRef = useRef(null);
+  const cartContainerRef = useRef(null);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isCartOpen &&
+        cartButtonRef.current &&
+        !cartButtonRef.current.contains(event.target) &&
+        cartContainerRef.current &&
+        !cartContainerRef.current.contains(event.target)
+      ) {
+        setIsCartOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isCartOpen]);
 
   return (
     <header className='p-4 bg-white border-b border-gray-200 md:pb-8 md:pt-6 custom:px-0'>
@@ -97,6 +117,7 @@ export default function Header() {
         </div>
         <div className='flex items-center pt-1 gap-4'>
           <button
+            ref={cartButtonRef}
             className='cursor-pointer relative'
             onClick={() => setIsCartOpen(!isCartOpen)}
           >
@@ -115,6 +136,7 @@ export default function Header() {
           />
         </div>
         <div
+          ref={cartContainerRef}
           className={`cart-container absolute z-50
              w-full md:w-96 h-72 transition-transform duration-300 ease-in-out
              bg-white rounded-lg top-15 md:right-0 md:top-16 shadow-md overflow-hidden  ${
@@ -148,7 +170,6 @@ export default function Header() {
                   </div>
                 </div>
                 <button className='bg-orange font-bold py-3 rounded-md w-full flex justify-center items-center gap-2'>
-                
                   <span>Checkout</span>
                 </button>
               </div>

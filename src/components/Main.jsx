@@ -8,6 +8,9 @@ export default function Main() {
     productImg,
     previousImage,
     nextImage,
+    changeImage,
+    previewImage,
+    
   } = useContext(StoreContext);
   const [items, setItems] = useState(0);
 
@@ -27,24 +30,60 @@ export default function Main() {
 
   return (
     <main className='max-w-screen-lg mx-auto md:grid md:grid-cols-2 md:px-4 lg:px-0 md:mt-8 md:gap-4 lg:gap-20 lg:mt-16'>
-      <section className='flex relative'>
+      <section className='relative'>
+       
         <img
-          className='aspect-square object-cover h-80 w-full  md:h-auto md:rounded-md '
+          className='aspect-square object-cover h-80 w-full md:hover:cursor-pointer md:h-auto md:rounded-md '
           src={productImg(currentImage)[0]}
+          onClick={previewImage}
           alt=''
         />
         <button
           onClick={previousImage}
-          className='absolute md:hidden   cursor-pointer flex justify-center items-center top-[50%] -translate-y-[50%] rounded-full bg-white size-10 left-4'
+          className='absolute md:hidden hover:scale-[1.1] transition-transform duration-300 ease-in-out   cursor-pointer flex justify-center items-center top-[50%] -translate-y-[50%] rounded-full bg-white size-10 left-4'
         >
           <img src='/images/icon-previous.svg' className='size-3' alt='' />
         </button>
         <button
           onClick={nextImage}
-          className='absolute md:hidden cursor-pointer flex justify-center items-center top-[50%] -translate-y-[50%] rounded-full bg-white size-10 right-4'
+          className='absolute md:hidden hover:scale-[1.1] transition-transform duration-300 ease-in-out cursor-pointer flex justify-center items-center top-[50%] -translate-y-[50%] rounded-full bg-white size-10 right-4'
         >
           <img src='/images/icon-next.svg' className='size-3' alt='' />
         </button>
+        <div className='hidden md:grid md:grid-cols-4 md:gap-4  md:mt-4 w-full'>
+          <img
+            className={`hover:opacity-50 cursor-pointer
+              ${
+                currentImage == 1 ? "opacity-50 border-3 border-orange" : ""
+              }  rounded-md`}
+            src={productImg(1)[1]}
+            onClick={() => changeImage(1)}
+          />
+          <img
+            className={`hover:opacity-50 cursor-pointer
+            ${
+              currentImage == 2 ? "opacity-50 border-3 border-orange" : ""
+            }  rounded-md`}
+            src={productImg(2)[1]}
+            onClick={() => changeImage(2)}
+          />
+          <img
+            className={`hover:opacity-50 cursor-pointer
+              ${
+                currentImage == 3 ? "opacity-50 border-3 border-orange" : ""
+              }  rounded-md`}
+            src={productImg(3)[1]}
+            onClick={() => changeImage(3)}
+          />
+          <img
+            className={`hover:opacity-50 cursor-pointer
+              ${
+                currentImage == 4 ? "opacity-50 border-3 border-orange" : ""
+              }  rounded-md`}
+            src={productImg(4)[1]}
+            onClick={() => changeImage(4)}
+          />
+        </div>
       </section>
       <section className='p-4 pb-14 md:flex md:justify-center flex-col md:p-0'>
         <h2> Sneaker Company</h2>
@@ -65,13 +104,19 @@ export default function Main() {
           </div>
           <span className='line-through text-xs font-bold'>$250.00</span>
         </div>
-        <div className="md:grid md:grid-cols-2 gap-4">
+        <div className='md:grid md:grid-cols-2 gap-4'>
           <div className='flex justify-between items-center mb-4 py-2 px-4 md:mb-0 rounded-md bg-grayish-blue/10'>
-            <button onClick={removeItems}>
+            <button
+              className='hover:scale-[1.3] transition-transform duration-300 ease-in-out '
+              onClick={removeItems}
+            >
               <img src='/images/icon-minus.svg' alt='' />
             </button>
             <span className='font-bold'>{items}</span>
-            <button onClick={addItems}>
+            <button
+              className='hover:scale-[1.3] transition-transform duration-300 ease-in-out '
+              onClick={addItems}
+            >
               <img src='/images/icon-plus.svg' alt='' />
             </button>
           </div>
