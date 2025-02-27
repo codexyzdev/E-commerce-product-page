@@ -29,7 +29,7 @@ export default function Main() {
   };
 
   return (
-    <main className='max-w-screen-lg mx-auto md:grid md:grid-cols-2 md:px-4 lg:px-0 md:mt-8 md:gap-4 lg:gap-20 lg:mt-16'>
+    <main className='max-w-screen-lg mx-auto md:grid md:grid-cols-2 md:px-4 lg:px-0 md:mt-8 md:gap-4 lg:gap-20 lg:mt-14'>
       <section className='relative'>
        
         <img
@@ -105,7 +105,7 @@ export default function Main() {
           <span className='line-through text-xs font-bold'>$250.00</span>
         </div>
         <div className='md:grid md:grid-cols-2 gap-4'>
-          <div className='flex justify-between items-center mb-4 py-2 px-4 md:mb-0 rounded-md bg-grayish-blue/10'>
+          <div className='flex justify-between items-center mb-4 py-2 px-4 md:mb-0 rounded-md bg-grayish-blue/20'>
             <button
               className='hover:scale-[1.3] transition-transform duration-300 ease-in-out '
               onClick={removeItems}
