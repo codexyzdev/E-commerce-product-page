@@ -29,7 +29,7 @@ export default function Container() {
           </button>
           <div className='flex flex-col gap-4 w-[512px]'>
             <div className='relative'>
-              <img className='w-lg' src={productImg(currentImage)[0]} />
+              <img className='w-lg rounded-md' src={productImg(currentImage)[0]} />
               <button
                 onClick={previousImage}
                 className='absolute  hover:scale-[1.1] transition-transform duration-300 ease-in-out   cursor-pointer flex justify-center items-center top-[50%] -translate-y-[50%] rounded-full bg-white size-10 -left-4'
